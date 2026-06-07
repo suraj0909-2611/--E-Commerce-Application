@@ -1,0 +1,44 @@
+<div class="product-card" (click)="openProductDetails()">
+
+  <!-- Product Image -->
+
+  <div class="image-wrap">
+    <img [src]="product.image" [alt]="product.name">
+    <!-- Category Badge -->
+    <span class="category-badge">
+      {{ product.category }}
+    </span>
+  </div>
+
+  <!-- Product Content -->
+  <div class="product-content">
+
+    <h3>
+      {{ product.name }}
+    </h3>
+
+    <p class="description">
+      Premium quality product with modern design.
+    </p>
+
+    <div class="price-row">
+      <span class="price">
+        ₹{{ product.price }}
+      </span>
+
+      <span class="stock">
+        In Stock
+      </span>
+
+    </div>
+
+    <button class="add-cart-btn" (click)="addToCart(); $event.stopPropagation()">
+
+      <i class="bi bi-cart-plus"></i>
+      Add to Cart
+
+    </button>
+
+  </div>
+
+</div>

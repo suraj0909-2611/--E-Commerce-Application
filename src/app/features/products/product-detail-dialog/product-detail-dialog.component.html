@@ -1,0 +1,44 @@
+<div class="dialog-wrapper">
+
+  <button
+    type="button"
+    class="close-btn"
+    (click)="closeDialog()">
+    ×
+  </button>
+
+  <div class="dialog-image">
+    <img
+      [src]="product.image"
+      [alt]="product.name"
+    />
+  </div>
+
+  <div class="dialog-content">
+
+    <span class="category">
+      {{ product.category }}
+    </span>
+
+    <h2>
+      {{ product.name }}
+    </h2>
+
+    <p class="description">
+      Premium quality product with modern design and best user experience.
+    </p>
+
+    <h3>
+      ₹{{ product.price }}
+    </h3>
+
+    <button
+      type="button"
+      class="add-cart-btn"
+      (click)="addToCart()">
+      Add to Cart
+    </button>
+
+  </div>
+
+</div>

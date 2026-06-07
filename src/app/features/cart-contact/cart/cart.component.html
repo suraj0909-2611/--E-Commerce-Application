@@ -1,0 +1,83 @@
+<div class="cart">
+  <div class="cart-header">
+  <h1>Shopping Cart</h1>
+  <div class="header-actions">
+    <a routerLink="/products" class="continue-btn">
+      ← Continue Shopping
+    </a>
+    <a routerLink="/contact" class="contact-btn">
+      Contact Us
+    </a>
+  </div>
+</div>
+@if(cartService.cartItems().length === 0) {
+
+<div class="empty-cart">
+  <i class="bi bi-cart-x empty-icon"></i>
+  <h2>Your Cart Is Empty</h2>
+  <p>Add products to your cart to see them here.</p>
+</div>
+
+} @else {
+
+@for(item of cartService.cartItems(); track item.id) {
+
+<div class="cart-item">
+
+  <!-- Product Image -->
+  <img [src]="item.image" [alt]="item.name" class="product-image">
+
+  <!-- Product Details -->
+  <div class="product-info">
+
+    <h3>{{ item.name }}</h3>
+
+    <p class="price">
+      ₹{{ item.price }}
+    </p>
+
+    <p class="total">
+      Total: ₹{{ item.price * item.quantity }}
+    </p>
+
+  </div>
+
+  <!-- Quantity Actions -->
+  <div class="quantity-box">
+
+    <button class="qty-btn" (click)="decreaseQuantity(item.id)">
+      -
+    </button>
+
+    <span>
+      {{ item.quantity }}
+    </span>
+
+    <button class="qty-btn" (click)="increaseQuantity(item.id)">
+      +
+    </button>
+
+  </div>
+
+  <!-- Remove Button -->
+  <button class="remove-btn" (click)="removeItem(item.id)">
+    Remove
+  </button>
+
+</div>
+
+}
+
+<!-- Total Price-->
+<div class="total-Price-box">
+
+  <h2>Total Price</h2>
+
+  <span>
+    ₹{{ cartService.grandTotal() }}
+  </span>
+
+</div>
+
+}
+</div>
