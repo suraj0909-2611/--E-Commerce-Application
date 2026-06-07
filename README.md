@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # EcommerceApp
 
 ## Overview
@@ -95,3 +96,6 @@ The build artifacts will be stored in the `dist/` directory.
 ## Author
 
 Suraj Shetti
+=======
+# --E-Commerce-Application
+>>>>>>> 73fc1a02bedcff040bf2cd16458aa2d80af5e862
