@@ -1,5 +1,4 @@
 import { Injectable, computed, effect, signal } from '@angular/core';
-
 import { Product } from '../models/product.model';
 import { CartItem } from '../models/cart-item.model';
 
@@ -40,12 +39,9 @@ export class CartService {
 
 // Add product to cart
 addToCart(product: Product): void {
-
   this.cartItems.update(items => {
-
     // Check product already exists or not
     const existingItem = items.find(item => item.id === product.id);
-
     // If product exists, increase quantity
     if (existingItem) {
       return items.map(item =>
@@ -100,7 +96,6 @@ addToCart(product: Product): void {
   // Load cart from localStorage
   private loadCartFromStorage(): CartItem[] {
     const cartData = localStorage.getItem(this.storageKey);
-
     return cartData ? JSON.parse(cartData) : [];
   }
 }

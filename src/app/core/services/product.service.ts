@@ -11,7 +11,6 @@ export class ProductService {
 
   // Inject HttpClient using Angular's inject function
   private http = inject(HttpClient);
-
   constructor() {}
 
   /**
