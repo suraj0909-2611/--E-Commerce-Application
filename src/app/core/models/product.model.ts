@@ -1,5 +1,4 @@
 // Product interface for strong typing
-
 export interface Product {
   id: number;         // Unique product ID
   name: string;       // Product name
