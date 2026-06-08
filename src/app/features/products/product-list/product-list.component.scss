@@ -2,23 +2,23 @@
   min-height: 100vh;
   padding: 20px 20px 70px;
   background:
-    radial-gradient(circle at top left, rgba(15, 14, 13, 0.07), transparent 34%),
+    radial-gradient(
+      circle at top left,
+      rgba(15, 14, 13, 0.07),
+      transparent 34%
+    ),
     #f8fafc;
 }
 .shop-navbar {
   position: sticky;
   top: 16px;
   z-index: 100;
-
   max-width: 1400px;
   margin: 0 auto 30px;
-
   background: rgba(255, 255, 255, 0.92);
   border: 1px solid #e2e8f0;
   border-radius: 24px;
-
   padding: 14px;
-
   box-shadow: 0 12px 40px rgba(15, 23, 42, 0.08);
   backdrop-filter: blur(16px);
 }
@@ -33,13 +33,10 @@
 .brand-icon {
   width: 44px;
   height: 44px;
-
   display: grid;
   place-items: center;
-
   background: #0f0e0d;
   color: #ffffff;
-
   border-radius: 15px;
   font-size: 20px;
 }
@@ -52,15 +49,12 @@
 
 .search-box {
   height: 50px;
-
   display: flex;
   align-items: center;
   gap: 12px;
-
   background: #f8fafc;
   border: 1px solid #e2e8f0;
   border-radius: 16px;
-
   padding: 0 16px;
 }
 
@@ -83,23 +77,17 @@
 .category-btn {
   width: 100%;
   height: 50px;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 10px;
-
   background: #ffffff;
   color: #0f172a;
-
   border: 1px solid #e2e8f0;
   border-radius: 16px;
-
   padding: 0 16px;
-
   font-size: 14px;
   font-weight: 700;
-
   cursor: pointer;
 }
 
@@ -113,16 +101,12 @@
   position: absolute;
   top: 60px;
   right: 0;
-
   width: 100%;
   min-width: 220px;
-
   background: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 18px;
-
   padding: 10px;
-
   box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
   z-index: 999;
 }
@@ -131,12 +115,9 @@
   width: 100%;
   border: none;
   background: transparent;
-
   text-align: left;
-
   padding: 12px 14px;
   border-radius: 12px;
-
   color: #0f172a;
   font-size: 14px;
   font-weight: 600;
@@ -156,19 +137,14 @@
 .cart-btn {
   width: 100%;
   height: 50px;
-
   text-decoration: none;
-
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 8px;
-
   background: #0f0e0d;
   color: #ffffff;
-
   border-radius: 16px;
-
   font-weight: 900;
 }
 
@@ -180,13 +156,10 @@
 .cart-btn span {
   background: #ffffff;
   color: #0f0e0d;
-
   min-width: 22px;
   height: 22px;
-
   display: grid;
   place-items: center;
-
   border-radius: 999px;
   font-size: 11px;
   padding: 0 6px;
@@ -224,7 +197,6 @@
   margin: 0 auto;
 }
 
-
 app-product-card {
   display: block;
   height: 100%;
@@ -238,7 +210,6 @@ app-product-card {
   border: 5px solid #e2e8f0;
   border-top-color: #0f0e0d;
   border-radius: 50%;
-
   animation: spin 0.8s linear infinite;
 }
 
