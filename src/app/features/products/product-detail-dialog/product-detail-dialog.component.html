@@ -1,21 +1,11 @@
 <div class="dialog-wrapper">
-
-  <button
-    type="button"
-    class="close-btn"
-    (click)="closeDialog()">
-    ×
-  </button>
+  <button type="button" class="close-btn" (click)="closeDialog()">×</button>
 
   <div class="dialog-image">
-    <img
-      [src]="product.image"
-      [alt]="product.name"
-    />
+    <img [src]="product.image" [alt]="product.name" />
   </div>
 
   <div class="dialog-content">
-
     <span class="category">
       {{ product.category }}
     </span>
@@ -28,17 +18,10 @@
       Premium quality product with modern design and best user experience.
     </p>
 
-    <h3>
-      ₹{{ product.price }}
-    </h3>
+    <h3>₹{{ product.price }}</h3>
 
-    <button
-      type="button"
-      class="add-cart-btn"
-      (click)="addToCart()">
+    <button type="button" class="add-cart-btn" (click)="addToCart()">
       Add to Cart
     </button>
-
   </div>
-
 </div>

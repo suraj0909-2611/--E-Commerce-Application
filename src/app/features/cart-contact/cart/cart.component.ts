@@ -5,15 +5,15 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-cart',
-  imports: [RouterLink,CommonModule],
+  imports: [RouterLink, CommonModule],
   templateUrl: './cart.component.html',
-  styleUrl: './cart.component.scss'
+  styleUrl: './cart.component.scss',
 })
 export class CartComponent {
   // Inject cart service
   cartService = inject(CartService);
 
-   // Increase item quantity
+  // Increase item quantity
   increaseQuantity(productId: number): void {
     this.cartService.increaseQuantity(productId);
   }

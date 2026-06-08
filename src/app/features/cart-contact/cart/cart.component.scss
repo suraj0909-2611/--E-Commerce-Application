@@ -1,11 +1,5 @@
 .cart {
   padding: 20px 20px 70px;
-  background: linear-gradient(
-    180deg,
-    #f8fafc 0%,
-    #f1f5f9 100%
-  );
-
   .cart-header {
     display: flex;
     justify-content: space-between;
@@ -79,7 +73,6 @@
     transition: all 0.3s ease;
 
     &:hover {
-      transform: translateY(-3px);
       box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
     }
   }
@@ -162,7 +155,7 @@
     }
   }
 
-  .total-price-box {
+  .total-price {
     margin-top: 24px;
     display: flex;
     justify-content: space-between;

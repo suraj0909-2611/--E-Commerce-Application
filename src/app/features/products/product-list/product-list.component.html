@@ -1,102 +1,92 @@
 <section class="products-page">
-
   <!-- Sticky Navbar -->
-<header class="shop-navbar">
-  <div class="container-fluid px-0">
-    <div class="row g-3 align-items-center">
-      <!-- Logo -->
-      <div class="col-12 col-md-4 col-lg-2">
-        <div class="brand">
-          <div class="brand-icon">
-            <i class="bi bi-bag-check"></i>
+  <header class="shop-navbar">
+    <div class="container-fluid px-0">
+      <div class="row g-3 align-items-center">
+        <!-- Logo -->
+        <div class="col-12 col-md-4 col-lg-2">
+          <div class="brand">
+            <div class="brand-icon">
+              <i class="bi bi-bag-check"></i>
+            </div>
+            <span>ShopEase</span>
           </div>
-          <span>ShopEase</span>
         </div>
-      </div>
-      <!-- Search -->
-      <div class="col-12 col-md-8 col-lg-6">
-        <div class="search-box">
-          <i class="bi bi-search"></i>
-          <input
-            type="text"
-            placeholder="Search products..."
-            #search
-            (input)="searchText.set(search.value)"
-          />
+        <!-- Search -->
+        <div class="col-12 col-md-8 col-lg-6">
+          <div class="search-box">
+            <i class="bi bi-search"></i>
+            <input
+              type="text"
+              placeholder="Search products..."
+              #search
+              (input)="searchText.set(search.value)"
+            />
+          </div>
         </div>
-      </div>
-      <!-- Category -->
-      <div class="col-8 col-md-6 col-lg-3">
-        <!-- Keep your existing category-menu code here -->
-        <div class="category-menu">
-          <button
-            type="button"
-            class="category-btn"
-            (click)="toggleMenu()">
-            <span class="category-text">
-              {{ selectedCategory() || 'All Categories' }}
-            </span>
-            <i class="bi bi-chevron-down"></i>
-          </button>
-          @if(isMenuOpen()) {
-            <div class="mega-menu">
-              <button
-                type="button"
-                class="menu-item"
-                [class.active]="selectedCategory() === ''"
-                (click)="selectAllCategories()">
-
-                All Categories
-              </button>
-              @for(category of categories(); track category) {
+        <!-- Category -->
+        <div class="col-8 col-md-6 col-lg-3">
+          <!-- Keep your existing category-menu code here -->
+          <div class="category-menu"  (click)="$event.stopPropagation()">
+            <button type="button" class="category-btn" (click)="toggleMenu() ;$event.stopPropagation()">
+              <span class="category-text">
+                {{ selectedCategory() || "All Categories" }}
+              </span>
+              <i class="bi bi-chevron-down"></i>
+            </button>
+            @if (isMenuOpen()) {
+              <div class="mega-menu">
                 <button
                   type="button"
                   class="menu-item"
-                  [class.active]="selectedCategory() === category"
-                  (click)="selectCategory(category)">
-                  {{ category }}
+                  [class.active]="selectedCategory() === ''"
+                  (click)="selectAllCategories()"
+                >
+                  All Categories
                 </button>
-              }
+                @for (category of categories(); track category) {
+                  <button
+                    type="button"
+                    class="menu-item"
+                    [class.active]="selectedCategory() === category"
+                    (click)="selectCategory(category)"
+                  >
+                    {{ category }}
+                  </button>
+                }
+              </div>
+            }
+          </div>
+        </div>
+        <!-- Cart -->
+        <div class="col-4 col-md-6 col-lg-1">
+          <a routerLink="/cart" class="cart-btn">
+            <i class="bi bi-cart3"></i>
+            <span>
+              {{ cartService.cartCount() }}
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Loader -->
+  @if (isLoading()) {
+    <div class="loader"></div>
+  } @else {
+    @if (filteredProducts().length === 0) {
+      <app-empty-state></app-empty-state>
+    } @else {
+      <div class="container-fluid px-0">
+        <div class="row g-4">
+          @for (product of filteredProducts(); track product.id) {
+            <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+              <app-product-card [product]="product"></app-product-card>
             </div>
           }
         </div>
       </div>
-      <!-- Cart -->
-      <div class="col-4 col-md-6 col-lg-1">
-        <a routerLink="/cart" class="cart-btn">
-          <i class="bi bi-cart3"></i>
-          <span>
-            {{ cartService.cartCount() }}
-          </span>
-        </a>
-      </div>
-    </div>
-  </div>
-</header>
-
-  <!-- Loader -->
-  @if(isLoading()) {
-
-  <div class="loader"></div>
-
-  } @else {
-
-  @if(filteredProducts().length === 0) {
-
-  <app-empty-state></app-empty-state>
-
-  } @else {
-
- <div class="container-fluid px-0">
-
-  <div class="row g-4">
-
-    @for(product of filteredProducts(); track product.id) {
-
-      <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
-        <app-product-card [product]="product"></app-product-card>
-      </div>
     }
-  </div>
-</div>}}
+  }
 </section>

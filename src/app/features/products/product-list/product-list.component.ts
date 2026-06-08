@@ -1,4 +1,11 @@
-import { Component, OnInit, computed, inject, signal } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  computed,
+  inject,
+  signal,
+  HostListener,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ProductService } from '../../../core/services/product.service';
@@ -11,14 +18,20 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 
 @Component({
-   selector: 'app-product-list',
+  selector: 'app-product-list',
   standalone: true,
-  imports: [CommonModule,ProductCardComponent,EmptyStateComponent,RouterLink,MatSelectModule,MatFormFieldModule],
+  imports: [
+    CommonModule,
+    ProductCardComponent,
+    EmptyStateComponent,
+    RouterLink,
+    MatSelectModule,
+    MatFormFieldModule,
+  ],
   templateUrl: './product-list.component.html',
-  styleUrl: './product-list.component.scss'
+  styleUrl: './product-list.component.scss',
 })
 export class ProductListComponent implements OnInit {
-
   // Inject Product and cart Service
   private productService = inject(ProductService);
   cartService = inject(CartService);
@@ -37,12 +50,10 @@ export class ProductListComponent implements OnInit {
    * Load products from JSON file
    */
   loadProducts(): void {
-
     this.isLoading.set(true);
 
     this.productService.getProducts().subscribe({
       next: (response) => {
-
         // Store API response
         this.products.set(response);
 
@@ -54,67 +65,68 @@ export class ProductListComponent implements OnInit {
         console.error('Error loading products', error);
 
         this.isLoading.set(false);
-      }
+      },
     });
   }
 
   // Search text
-searchText = signal('');
+  searchText = signal('');
 
-// Selected category
-selectedCategory = signal('');
+  // Selected category
+  selectedCategory = signal('');
 
-
-// Filter products based on search and category
-filteredProducts = computed(() => {
-
-  return this.products().filter(product => {
-
-    const searchMatch =
-      product.name
+  // Filter products based on search and category
+  filteredProducts = computed(() => {
+    return this.products().filter((product) => {
+      const searchMatch = product.name
         .toLowerCase()
         .includes(this.searchText().toLowerCase());
 
-    const categoryMatch =
-      !this.selectedCategory() ||
-      product.category === this.selectedCategory();
+      const categoryMatch =
+        !this.selectedCategory() ||
+        product.category === this.selectedCategory();
 
-    return searchMatch && categoryMatch;
+      return searchMatch && categoryMatch;
+    });
   });
 
-});
+  // Get unique categories from products
+  categories = computed(() => {
+    return [...new Set(this.products().map((p) => p.category))];
+  });
 
+  // Category dropdown open/close
+  isMenuOpen = signal(false);
 
-// Get unique categories from products
-categories = computed(() => {
-  return [
-    ...new Set(this.products().map(p => p.category))
-  ];
-});
+  // Toggle category menu
+  toggleMenu(): void {
+    this.isMenuOpen.update((value) => !value);
+  }
 
+  // Close menu
+  closeMenu(): void {
+    this.isMenuOpen.set(false);
+  }
 
-// Category dropdown open/close
-isMenuOpen = signal(false);
+  // Select category
+  selectCategory(category: string): void {
+    this.selectedCategory.set(category);
+    this.closeMenu();
+  }
 
-// Toggle category menu
-toggleMenu(): void {
-  this.isMenuOpen.update(value => !value);
-}
+  // Select all categories
+  selectAllCategories(): void {
+    this.selectedCategory.set('');
+    this.closeMenu();
+  }
 
-// Close menu
-closeMenu(): void {
-  this.isMenuOpen.set(false);
-}
+  // Close category dropdown when clicking outside
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: Event): void {
+    const target = event.target as HTMLElement;
 
-// Select category
-selectCategory(category: string): void {
-  this.selectedCategory.set(category);
-  this.closeMenu();
-}
-
-// Select all categories
-selectAllCategories(): void {
-  this.selectedCategory.set('');
-  this.closeMenu();
-}
+    if (!target.closest('.category-menu')) {
+      this.isMenuOpen.set(false);
+    }
+  }
 }

@@ -10,16 +10,11 @@ import { ProductDetailDialogComponent } from '../product-detail-dialog/product-d
 @Component({
   selector: 'app-product-card',
   standalone: true,
-  imports: [
-    CommonModule,
-    MatSnackBarModule,
-    MatDialogModule
-  ],
+  imports: [CommonModule, MatSnackBarModule, MatDialogModule],
   templateUrl: './product-card.component.html',
-  styleUrl: './product-card.component.scss'
+  styleUrl: './product-card.component.scss',
 })
 export class ProductCardComponent {
-
   @Input({ required: true }) product!: Product;
 
   private cartService = inject(CartService);
@@ -32,29 +27,21 @@ export class ProductCardComponent {
       width: '850px',
       height: '550px',
       maxWidth: '95vw',
-      panelClass: 'product-dialog'
+      panelClass: 'product-dialog',
     });
   }
-addToCart(): void {
+  addToCart(): void {
+    this.cartService.addToCart(this.product);
 
-  this.cartService.addToCart(this.product);
+    const isMobile = window.innerWidth <= 768;
 
-  const isMobile = window.innerWidth <= 768;
-
-  if (!isMobile) {
-
-    this.snackBar.open(
-      `${this.product.name} added to cart`,
-      '',
-      {
+    if (!isMobile) {
+      this.snackBar.open(`${this.product.name} added to cart`, '', {
         duration: 2000,
         horizontalPosition: 'center',
         verticalPosition: 'top',
-        panelClass: ['success-snackbar']
-      }
-    );
-
+        panelClass: ['success-snackbar'],
+      });
+    }
   }
-
-}
 }

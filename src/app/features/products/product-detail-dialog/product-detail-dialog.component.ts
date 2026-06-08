@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import {
   MAT_DIALOG_DATA,
   MatDialogRef,
-  MatDialogModule
+  MatDialogModule,
 } from '@angular/material/dialog';
 
 import { Product } from '../../../core/models/product.model';
@@ -13,15 +13,11 @@ import { CartService } from '../../../core/services/cart.service';
 @Component({
   selector: 'app-product-detail-dialog',
   standalone: true,
-  imports: [
-    CommonModule,
-    MatDialogModule
-  ],
+  imports: [CommonModule, MatDialogModule],
   templateUrl: './product-detail-dialog.component.html',
-  styleUrl: './product-detail-dialog.component.scss'
+  styleUrl: './product-detail-dialog.component.scss',
 })
 export class ProductDetailDialogComponent {
-
   product = inject<Product>(MAT_DIALOG_DATA);
 
   private dialogRef = inject(MatDialogRef<ProductDetailDialogComponent>);
